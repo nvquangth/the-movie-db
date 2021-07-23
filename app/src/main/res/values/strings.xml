@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">CleanArchitecture</string>
 
+    <string name="msg_slogan">The Movie Database</string>
+
     <string name="msg_loading">Loading data</string>
     <string name="msg_load_data_failed">Loading data failed, please try again!</string>
 

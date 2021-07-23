@@ -16,6 +16,7 @@ import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
@@ -35,6 +36,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 viewModel.login()
             }
         }
+
+        KeyboardVisibilityEvent.setEventListener(activity ?: return, viewLifecycleOwner, { isShowKeyboard ->
+            if (isShowKeyboard) {
+                viewBinding.motionLayoutLogin.transitionToEnd()
+            } else {
+                viewBinding.motionLayoutLogin.transitionToStart()
+            }
+        })
     }
 
     private fun observe() {

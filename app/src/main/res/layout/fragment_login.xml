@@ -21,19 +21,32 @@
         <import type="android.view.View" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motionLayoutLogin"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_login_scene">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iamgeLogo"
-            android:layout_width="wrap_content"
+            android:id="@+id/imageLogo"
+            android:layout_width="0dp"
             android:layout_height="@dimen/dp_128"
             android:layout_marginTop="@dimen/dp_32"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo_app" />
+
+        <TextView
+            android:id="@+id/textSlogan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/msg_slogan"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintEnd_toEndOf="@+id/imageLogo"
+            app:layout_constraintStart_toStartOf="@+id/imageLogo"
+            app:layout_constraintTop_toBottomOf="@+id/imageLogo" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutUsername"
@@ -48,7 +61,7 @@
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iamgeLogo"
+            app:layout_constraintTop_toBottomOf="@+id/textSlogan"
             app:startIconDrawable="@drawable/ic_baseline_perm_identity_24">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -84,13 +97,13 @@
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkboxRememberLogin"
-            app:layout_constraintStart_toStartOf="@+id/layoutPassword"
-            app:layout_constraintEnd_toEndOf="@+id/layoutPassword"
-            app:layout_constraintTop_toBottomOf="@+id/layoutPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:checked="@={viewModel.rememberLogin}"
             android:text="@string/msg_remember_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:layout_constraintEnd_toEndOf="@+id/layoutPassword"
+            app:layout_constraintStart_toStartOf="@+id/layoutPassword"
+            app:layout_constraintTop_toBottomOf="@+id/layoutPassword" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonLogin"
@@ -133,5 +146,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
