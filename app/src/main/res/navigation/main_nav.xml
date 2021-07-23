@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/popularMovieFragment">
+
+    <action
+        android:id="@+id/actionLogout"
+        app:destination="@+id/login_nav"
+        app:popUpTo="@+id/login_nav"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/popularMovieFragment"
+        android:name="com.example.cleanarchitecture.ui.popularmovie.PopularMovieFragment"
+        android:label="PopularMovieFragment"
+        tools:layout="@layout/fragment_popular_movie">
+
+        <action
+            android:id="@+id/action_popularMovieFragment_to_searchMovieFragment"
+            app:destination="@+id/searchMovieFragment" />
+
+        <action
+            android:id="@+id/action_popularMovieFragment_to_loginFragment"
+            app:destination="@+id/loginFragment" />
+
+        <action
+            android:id="@+id/action_popularMovieFragment_to_themeSettingFragment"
+            app:destination="@+id/themeSettingFragment" />
+        <action
+            android:id="@+id/action_popularMovieFragment_to_detailMovieActivity"
+            app:destination="@id/detailMovieActivity" />
+
+        <!--        <action-->
+        <!--            android:id="@+id/action_popularMovieFragment_to_detailFragment"-->
+        <!--            app:destination="@id/detailNav" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchMovieFragment"
+        android:name="com.example.cleanarchitecture.ui.searchmovie.SearchMovieFragment"
+        android:label="SearchMovieFragment"
+        tools:layout="@layout/fragment_search_movie">
+        <action
+            android:id="@+id/action_searchMovieFragment_to_detailMovieActivity"
+            app:destination="@id/detailMovieActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/themeSettingFragment"
+        android:name="com.example.cleanarchitecture.ui.theme.ThemeSettingFragment"
+        android:label="ThemeSettingFragment"
+        tools:layout="@layout/fragment_theme_setting" />
+
+    <activity
+        android:id="@+id/detailMovieActivity"
+        android:name="com.example.cleanarchitecture.ui.detail.DetailActivity"
+        android:label="DetailMovieActivity"
+        tools:layout="@layout/activity_detail">
+
+        <argument
+            android:name="movie_id"
+            app:argType="integer" />
+    </activity>
+
+    <!--    <include-dynamic-->
+    <!--        android:id="@+id/detailNav"-->
+    <!--        app:moduleName="dynamicfeature"-->
+    <!--        app:graphResName="detail_nav" />-->
+
+
+</navigation>
