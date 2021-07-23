@@ -18,7 +18,6 @@
     <string name="new_version_app">New version available</string>
     <string name="new_version_app_message">Please, update app to new version to continue using</string>
     <string name="logout_message">You will be returned to the login screen</string>
-    <string name="title_dynamicfeature">Detail Feature</string>
 
     <string name="title_error_login">Login Error</string>
 </resources>

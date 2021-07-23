@@ -222,7 +222,6 @@ dependencies {
     // Navigation
     api(Libs.navigationFragment)
     api(Libs.navigationUi)
-    api(Libs.navDynamicFeature)
 
     // RecyclerView
     implementation(Libs.recyclerView)

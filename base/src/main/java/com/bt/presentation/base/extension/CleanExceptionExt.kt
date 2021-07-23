@@ -30,7 +30,7 @@ fun CleanException.mapToExceptionItem(context: Context): ExceptionItem = when (t
     CleanExceptionType.DATA_NULL_OR_EMPTY -> AlertExceptionItem(
         title = context.getString(R.string.notification),
         message = context.getString(R.string.data_empty),
-        positiveButton = context.getString(R.string.ok)
+        positiveButton = context.getString(android.R.string.ok)
     )
 
     CleanExceptionType.NETWORK_NO_CONNECTION -> SnackBarExceptionItem(
