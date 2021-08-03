@@ -1,6 +1,5 @@
 package com.example.cleanarchitecture.ui.popularmovie
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -13,9 +12,12 @@ import com.example.cleanarchitecture.domain.usecase.movie.GetPopularMovieUseCase
 import com.example.cleanarchitecture.entity.exception.CleanException
 import com.example.cleanarchitecture.model.MovieItem
 import com.example.cleanarchitecture.model.MovieItemMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Inject
 
-class PopularMovieViewModel @ViewModelInject constructor(
+@HiltViewModel
+class PopularMovieViewModel @Inject constructor(
     private val getPopularMovieUseCase: GetPopularMovieUseCase,
     private val movieItemMapper: MovieItemMapper,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher

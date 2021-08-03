@@ -1,6 +1,5 @@
 package com.example.cleanarchitecture.ui.main
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,10 +8,13 @@ import com.bt.presentation.base.ui.BaseViewModel
 import com.bt.presentation.base.utils.Event
 import com.example.cleanarchitecture.anotation.DefaultDispatcher
 import com.example.cleanarchitecture.domain.usecase.auth.LogoutUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainSharedViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MainSharedViewModel @Inject constructor(
     private val logoutUseCase: LogoutUseCase,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : BaseViewModel() {

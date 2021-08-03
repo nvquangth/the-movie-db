@@ -2,7 +2,6 @@ package com.example.cleanarchitecture.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.bt.presentation.base.ui.BaseActivity
 import com.example.cleanarchitecture.R

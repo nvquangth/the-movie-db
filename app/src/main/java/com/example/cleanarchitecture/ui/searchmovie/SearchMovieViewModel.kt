@@ -1,6 +1,5 @@
 package com.example.cleanarchitecture.ui.searchmovie
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.bt.presentation.base.model.Result
@@ -8,9 +7,12 @@ import com.bt.presentation.base.ui.BaseViewModel
 import com.example.cleanarchitecture.domain.usecase.movie.SearchMovieUseCase
 import com.example.cleanarchitecture.model.MovieItem
 import com.example.cleanarchitecture.model.MovieItemMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchMovieViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SearchMovieViewModel @Inject constructor(
     private val searchMovieUseCase: SearchMovieUseCase,
     private val movieItemMapper: MovieItemMapper
 ) : BaseViewModel() {

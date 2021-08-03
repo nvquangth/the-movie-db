@@ -1,7 +1,6 @@
 plugins {
     id(GradlePlugins.androidLib)
     id(GradlePlugins.kotlinAndroid)
-    id(GradlePlugins.kotlinAndroidExt)
     id(GradlePlugins.kotlinKapt)
 }
 
@@ -30,10 +29,6 @@ android {
 
     buildFeatures {
         dataBinding = true
-    }
-
-    androidExtensions {
-        isExperimental = true
     }
 }
 
@@ -98,10 +93,9 @@ dependencies {
     kapt(Libs.glideProcessor)
 
     // Hilt
-    implementation(Libs.hiltDagger)
-    kapt(Libs.hiltDaggerCompiler)
-    implementation(Libs.hiltViewModel)
-    kapt(Libs.hiltAndroidProcessor)
+    implementation(Libs.hiltAndroid)
+    implementation(Libs.hiltCore)
+    kapt(Libs.hiltCompiler)
 
     // JUnit
     testImplementation(Libs.jUnit)

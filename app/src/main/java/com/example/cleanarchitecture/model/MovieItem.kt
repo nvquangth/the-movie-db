@@ -9,7 +9,7 @@ import com.bt.presentation.base.model.ModelItem
 import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.entity.Movie
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
 @Parcelize

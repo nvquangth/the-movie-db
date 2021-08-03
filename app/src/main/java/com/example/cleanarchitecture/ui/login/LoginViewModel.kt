@@ -1,6 +1,5 @@
 package com.example.cleanarchitecture.ui.login
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,10 +17,13 @@ import com.example.cleanarchitecture.domain.usecase.auth.CheckLoginUseCase
 import com.example.cleanarchitecture.domain.usecase.auth.LoginUseCase
 import com.example.cleanarchitecture.domain.usecase.validation.ValidatePasswordUseCase
 import com.example.cleanarchitecture.domain.usecase.validation.ValidateUsernameUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel @ViewModelInject constructor(
+@HiltViewModel
+class LoginViewModel @Inject constructor(
     private val validateUsernameUseCase: ValidateUsernameUseCase,
     private val validatePasswordUseCase: ValidatePasswordUseCase,
     private val loginUseCase: LoginUseCase,

@@ -1,6 +1,5 @@
 package com.example.cleanarchitecture.ui.detail
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -12,10 +11,13 @@ import com.example.cleanarchitecture.domain.usecase.movie.GetDetailMovieUseCase
 import com.example.cleanarchitecture.entity.exception.CleanException
 import com.example.cleanarchitecture.model.MovieItem
 import com.example.cleanarchitecture.model.MovieItemMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
-class DetailMovieViewModel @ViewModelInject constructor(
+@HiltViewModel
+class DetailMovieViewModel @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
     private val movieItemMapper: MovieItemMapper,
     private val getDetailMovieUseCase: GetDetailMovieUseCase

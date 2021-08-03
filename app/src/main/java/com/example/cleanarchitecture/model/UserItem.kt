@@ -4,7 +4,7 @@ import android.os.Parcelable
 import com.bt.presentation.base.model.ItemMapper
 import com.bt.presentation.base.model.ModelItem
 import com.example.cleanarchitecture.entity.User
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
 @Parcelize

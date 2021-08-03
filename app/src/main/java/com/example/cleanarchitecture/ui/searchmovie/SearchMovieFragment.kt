@@ -3,7 +3,6 @@ package com.example.cleanarchitecture.ui.searchmovie
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.bt.presentation.base.extension.hideKeyBoard
 import com.bt.presentation.base.extension.hideLoadingDialog
@@ -17,7 +16,6 @@ import com.example.cleanarchitecture.model.MovieItem
 import com.example.cleanarchitecture.ui.popularmovie.MovieAdapter
 import com.example.cleanarchitecture.widget.SpacesItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_search_movie.*
 
 @AndroidEntryPoint
 class SearchMovieFragment : BaseFragment<FragmentSearchMovieBinding, SearchMovieViewModel>() {
@@ -31,12 +29,12 @@ class SearchMovieFragment : BaseFragment<FragmentSearchMovieBinding, SearchMovie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toolbar?.setNavigationOnClickListener {
+        viewBinding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
             hideKeyBoard()
         }
 
-        toolbar?.setOnMenuItemClickListener {
+        viewBinding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.clearAction -> {
                     viewModel.clearQuery()
@@ -47,7 +45,7 @@ class SearchMovieFragment : BaseFragment<FragmentSearchMovieBinding, SearchMovie
         }
 
         movieAdapter = MovieAdapter(::onItemMovieClick)
-        recyclerMovie.apply {
+        viewBinding.recyclerMovie.apply {
             addItemDecoration(SpacesItemDecoration(requireContext()))
             adapter = movieAdapter
         }

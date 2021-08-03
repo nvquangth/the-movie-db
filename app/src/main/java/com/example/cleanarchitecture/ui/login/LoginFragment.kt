@@ -3,19 +3,15 @@ package com.example.cleanarchitecture.ui.login
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import com.bt.presentation.base.SystemConfigBottomSheetDialog
 import com.bt.presentation.base.extension.hideKeyBoard
 import com.bt.presentation.base.extension.setValidation
 import com.bt.presentation.base.model.Result
 import com.bt.presentation.base.model.RetryCallback
 import com.bt.presentation.base.ui.BaseFragment
-import com.example.cleanarchitecture.BuildConfig
 import com.example.cleanarchitecture.R
 import com.example.cleanarchitecture.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_login.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 
 @AndroidEntryPoint
@@ -37,22 +33,26 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             }
         }
 
-        KeyboardVisibilityEvent.setEventListener(activity ?: return, viewLifecycleOwner, { isShowKeyboard ->
-            if (isShowKeyboard) {
-                viewBinding.motionLayoutLogin.transitionToEnd()
-            } else {
-                viewBinding.motionLayoutLogin.transitionToStart()
+        KeyboardVisibilityEvent.setEventListener(
+            activity ?: return,
+            viewLifecycleOwner,
+            { isShowKeyboard ->
+                if (isShowKeyboard) {
+                    viewBinding.motionLayoutLogin.transitionToEnd()
+                } else {
+                    viewBinding.motionLayoutLogin.transitionToStart()
+                }
             }
-        })
+        )
     }
 
     private fun observe() {
         with(viewModel) {
             usernameValidation.observe(viewLifecycleOwner) {
-                layoutUsername.setValidation(it)
+                viewBinding.layoutUsername.setValidation(it)
             }
             passwordValidation.observe(viewLifecycleOwner) {
-                layoutPassword.setValidation(it)
+                viewBinding.layoutPassword.setValidation(it)
             }
             loginResult.observe(viewLifecycleOwner) { result ->
                 this@LoginFragment.hideKeyBoard()
@@ -77,28 +77,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     }
 
     private fun setupListener() {
-        buttonLogin.setOnClickListener {
+        viewBinding.buttonLogin.setOnClickListener {
             viewModel.login()
-        }
-
-        if (BuildConfig.DEBUG) {
-
-            textUsername.setText("admin")
-            textPassword.setText("1")
-
-            textHelper?.visibility = View.VISIBLE
-            textHelper?.setOnClickListener {
-
-                val configDialog = SystemConfigBottomSheetDialog.newInstance()
-
-                configDialog.show(parentFragmentManager, SystemConfigBottomSheetDialog.TAG)
-                configDialog.setAccountSelectedListener {
-                    textUsername.setText(it.username)
-                    textPassword.setText(it.password)
-                }
-
-                true
-            }
         }
     }
 }

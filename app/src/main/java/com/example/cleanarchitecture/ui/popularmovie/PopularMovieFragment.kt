@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.bt.presentation.base.model.Result
 import com.bt.presentation.base.model.RetryCallback
@@ -15,7 +14,6 @@ import com.example.cleanarchitecture.model.MovieItem
 import com.example.cleanarchitecture.ui.main.MainSharedViewModel
 import com.example.cleanarchitecture.widget.SpacesItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_popular_movie.*
 
 @AndroidEntryPoint
 class PopularMovieFragment : BaseFragment<FragmentPopularMovieBinding, PopularMovieViewModel>() {
@@ -31,7 +29,7 @@ class PopularMovieFragment : BaseFragment<FragmentPopularMovieBinding, PopularMo
         super.onViewCreated(view, savedInstanceState)
 
         movieAdapter = MovieAdapter(::onItemMovieClick)
-        recyclerMovie.apply {
+        viewBinding.recyclerMovie.apply {
             addItemDecoration(SpacesItemDecoration(requireContext()))
             adapter = movieAdapter
         }
@@ -63,7 +61,7 @@ class PopularMovieFragment : BaseFragment<FragmentPopularMovieBinding, PopularMo
             getPopularMovie(page = 1)
         }
 
-        toolbar?.setOnMenuItemClickListener {
+        viewBinding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.searchAction -> {
                     findNavController().navigate(PopularMovieFragmentDirections.actionPopularMovieFragmentToSearchMovieFragment())

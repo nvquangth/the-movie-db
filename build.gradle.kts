@@ -1,9 +1,8 @@
 buildscript {
 
-    val kotlin_version by extra("1.3.72")
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -18,7 +17,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 

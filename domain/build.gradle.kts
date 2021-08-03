@@ -16,7 +16,7 @@ dependencies {
     implementation(Libs.stdLib)
 
     // Hilt
-    implementation(Libs.hiltDagger)
+    implementation(Libs.hiltCore)
 
     // JUnit
     testImplementation(Libs.jUnit)

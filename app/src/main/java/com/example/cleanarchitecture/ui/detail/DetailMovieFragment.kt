@@ -3,7 +3,6 @@ package com.example.cleanarchitecture.ui.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.bt.presentation.base.ui.BaseFragment
 import com.example.cleanarchitecture.R
