@@ -30,8 +30,8 @@ android {
         getByName(BuildType.debug) {
             buildConfigField(
                 "String",
-                ProductFlavor.baseUrlParam,
-                ProductFlavor.baseUrlQa
+                "BASE_URL",
+                "\"${ProductFlavor.baseUrl}\""
             )
 
             buildConfigField(
@@ -50,8 +50,8 @@ android {
         getByName(BuildType.release) {
             buildConfigField(
                 "String",
-                ProductFlavor.baseUrlParam,
-                ProductFlavor.baseUrlProduction
+                "BASE_URL",
+                "\"${ProductFlavor.baseUrl}\""
             )
 
             buildConfigField(

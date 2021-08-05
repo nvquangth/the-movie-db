@@ -39,20 +39,33 @@ android {
     productFlavors {
 
         create("qa") {
+            val flavor = ProductFlavorFactory.getProductFlavor(ProductFlavorType.QA)
 
-            versionNameSuffix = "-qa"
-            applicationIdSuffix = ".qa"
+            versionName = flavor.versionName
+            versionNameSuffix = ".${flavor.name}"
+            applicationIdSuffix = ".${flavor.name}"
         }
 
         create("dev") {
+            val flavor = ProductFlavorFactory.getProductFlavor(ProductFlavorType.DEV)
 
-            versionNameSuffix = "-dev"
-            applicationIdSuffix = ".dev"
+            versionName = flavor.versionName
+            versionNameSuffix = ".${flavor.name}"
+            applicationIdSuffix = ".${flavor.name}"
+        }
+
+        create("stg") {
+            val flavor = ProductFlavorFactory.getProductFlavor(ProductFlavorType.STAGING)
+
+            versionName = flavor.versionName
+            versionNameSuffix = ".${flavor.name}"
+            applicationIdSuffix = ".${flavor.name}"
         }
 
         create("prod") {
+            val flavor = ProductFlavorFactory.getProductFlavor(ProductFlavorType.STAGING)
 
-            versionNameSuffix = "-prod"
+            versionNameSuffix = ".${flavor.name}"
         }
     }
 

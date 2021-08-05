@@ -5,7 +5,7 @@ object Android {
     const val minSdk = 21
     const val targetSdk = 30
     const val versionCode = 100
-    const val versionNam = "1.0.0"
+    const val versionName = "1.0.0"
 }
 
 object AndroidJUnit {
@@ -22,30 +22,54 @@ object BuildType {
     const val proguardRelease = "proguard-release.pro"
 }
 
-object ProductFlavor {
-    const val qa = "qa"
-    const val applicationIdQa = "com.example.cleanarchitecture.qa"
-    const val versionCodeQa = 201
-    const val versionNameQa = "2.0.1.QA"
-    const val baseUrlQa = "\"https://60ae0d5e80a61f00173324bc.mockapi.io\""
+abstract class ProductFlavor {
 
-    const val develop = "dev"
-    const val applicationIdDevelop = "com.example.cleanarchitecture.dev"
-    const val versionCodeDevelop = 201
-    const val versionNameDevelop = "2.0.1.DEV"
-    const val baseUrlDevelop = "\"https://60ae0d5e80a61f00173324bc.mockapi.io\""
+    companion object {
+        const val baseUrl = "https://api.themoviedb.org"
+    }
 
-    const val staging = "stg"
-    const val applicationIdStaging = "com.example.cleanarchitecture.stg"
-    const val versionCodeStaging = 115
-    const val versionNameStaging = "1.1.5.STG"
-    const val baseUrlStaging = "\"https://60ae0d5e80a61f00173324bc.mockapi.io\""
+    abstract val name: String
+    open val id: String = "com.example.cleanarchitecture"
+    open val versionCode: Int = 100
+    open val versionName: String = "1.0.0"
+    open val baseUrl: String = "https://api.themoviedb.org"
+}
 
-    const val production = "prod"
-    const val applicationIdProduction = "com.example.cleanarchitecture"
-    const val versionCodeProduction = 100
-    const val versionNameProduct = "1.0.0"
-    const val baseUrlProduction = "\"https://60ae0d5e80a61f00173324bc.mockapi.io\""
+class QaProductFlavor: ProductFlavor() {
+    override val name: String = "qa"
+}
 
-    const val baseUrlParam = "BASE_URL"
+class DevProductFlavor: ProductFlavor() {
+    override val name: String = "dev"
+
+}
+
+class StagingProductFlavor: ProductFlavor() {
+    override val name: String = "stg"
+
+}
+
+class ProductionProductFlavor: ProductFlavor() {
+    override val name: String = "prod"
+
+}
+
+class ProductFlavorFactory {
+
+    companion object {
+
+        fun getProductFlavor(type: ProductFlavorType): ProductFlavor = when(type) {
+            ProductFlavorType.QA -> QaProductFlavor()
+            ProductFlavorType.DEV -> DevProductFlavor()
+            ProductFlavorType.STAGING -> StagingProductFlavor()
+            ProductFlavorType.PRODUCT -> ProductionProductFlavor()
+        }
+    }
+}
+
+enum class ProductFlavorType {
+    QA,
+    DEV,
+    STAGING,
+    PRODUCT
 }

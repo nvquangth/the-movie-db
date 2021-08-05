@@ -26,52 +26,57 @@ fun Throwable.throwCleanException() {
 
         is HttpException -> {
 
-            val gson = Gson()
-            val typeToken = object : TypeToken<ErrorResponse>() {}.type
-            val errorResponse: ErrorResponse? =
-                gson.fromJson(this.response()?.errorBody()?.charStream(), typeToken)
-            val errorType = errorResponse?.type
-            val errorMsg = errorResponse?.message
+            try {
 
-            when (code()) {
-                // 400
-                HttpURLConnection.HTTP_BAD_REQUEST -> {
-                }
+                val gson = Gson()
+                val typeToken = object : TypeToken<ErrorResponse>() {}.type
+                val errorResponse: ErrorResponse? =
+                    gson.fromJson(this.response()?.errorBody()?.charStream(), typeToken)
+                val errorType = errorResponse?.type
+                val errorMsg = errorResponse?.message
 
-                // 401
-                HttpURLConnection.HTTP_UNAUTHORIZED -> throw CleanException(
-                    CleanExceptionType.UNAUTHORIZED,
-                    errorMsg
-                )
-
-                // 404
-                HttpURLConnection.HTTP_NOT_FOUND -> {
-                }
-
-                // 403
-                HttpURLConnection.HTTP_FORBIDDEN -> {
-                }
-
-                // 500
-                HttpURLConnection.HTTP_INTERNAL_ERROR -> {
-                }
-
-                // 503
-                HttpURLConnection.HTTP_UNAVAILABLE -> {
-                    when (errorType) {
-                        ErrorResponse.TYPE_APP_FORCE_UPDATE -> throw CleanException(
-                            CleanExceptionType.APP_FORCE_UPDATE,
-                            errorMsg
-                        )
-
-                        ErrorResponse.TYPE_SERVER_MAINTENANCE -> throw CleanException(
-                            CleanExceptionType.SERVER_MAINTENANCE,
-                            errorMsg
-                        )
+                when (code()) {
+                    // 400
+                    HttpURLConnection.HTTP_BAD_REQUEST -> {
                     }
-                }
 
-                else -> throw CleanException(CleanExceptionType.UNKNOWN, message)
+                    // 401
+                    HttpURLConnection.HTTP_UNAUTHORIZED -> throw CleanException(
+                        CleanExceptionType.UNAUTHORIZED,
+                        errorMsg
+                    )
+
+                    // 404
+                    HttpURLConnection.HTTP_NOT_FOUND -> {
+                    }
+
+                    // 403
+                    HttpURLConnection.HTTP_FORBIDDEN -> {
+                    }
+
+                    // 500
+                    HttpURLConnection.HTTP_INTERNAL_ERROR -> {
+                    }
+
+                    // 503
+                    HttpURLConnection.HTTP_UNAVAILABLE -> {
+                        when (errorType) {
+                            ErrorResponse.TYPE_APP_FORCE_UPDATE -> throw CleanException(
+                                CleanExceptionType.APP_FORCE_UPDATE,
+                                errorMsg
+                            )
+
+                            ErrorResponse.TYPE_SERVER_MAINTENANCE -> throw CleanException(
+                                CleanExceptionType.SERVER_MAINTENANCE,
+                                errorMsg
+                            )
+                        }
+                    }
+
+                    else -> throw CleanException(CleanExceptionType.UNKNOWN, message)
+                }
+            } catch (e: Exception) {
+                throw CleanException(CleanExceptionType.UNKNOWN, message)
             }
         }
         else -> throw CleanException(CleanExceptionType.UNKNOWN, message)
