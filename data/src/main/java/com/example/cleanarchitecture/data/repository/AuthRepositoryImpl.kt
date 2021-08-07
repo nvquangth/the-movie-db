@@ -14,24 +14,13 @@ class AuthRepositoryImpl @Inject constructor(
     private val authEntityMapper: AuthEntityMapper
 ) : AuthRepository {
 
-    override suspend fun login(username: String, password: String): Auth? = runCatching {
-        api.login(username, password).let {
-            authEntityMapper.mapToDomain(it)
-        }
-    }.getOrElse {
-        it.throwCleanException()
-        null
+    override suspend fun login(username: String, password: String): Auth = api.login(username, password).let {
+        authEntityMapper.mapToDomain(it)
     }
 
-    override suspend fun signUp(username: String, password: String, email: String): Auth? =
-        runCatching {
-            api.signUp(username, password, email).let {
-                authEntityMapper.mapToDomain(it)
-            }
-        }.getOrElse {
-            it.throwCleanException()
-            null
-        }
+    override suspend fun signUp(username: String, password: String, email: String): Auth = api.signUp(username, password, email).let {
+        authEntityMapper.mapToDomain(it)
+    }
 
     override suspend fun logout(): Boolean {
         // TODO update later

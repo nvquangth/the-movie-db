@@ -10,15 +10,11 @@ class UserRepositoryImpl @Inject constructor(
     private val userApi: UserApi,
     private val euserEntityMapper: UserEntityMapper
 ) : UserRepository {
-    override suspend fun searchUsers(fromServer: Boolean, q: String): List<User> {
-        val response = userApi.searchUser(q)
+    override suspend fun searchUsers(fromServer: Boolean, q: String): List<User> = userApi.searchUser(q).items?.map {
+        euserEntityMapper.mapToDomain(it)
+    } ?: emptyList()
 
-        if (response.items == null) return listOf()
-
-        return response.items.map { euserEntityMapper.mapToDomain(it) }
-    }
-
-    override suspend fun getUser(fromServer: Boolean, username: String): User {
-        return userApi.getUser(username).let { euserEntityMapper.mapToDomain(it) }
+    override suspend fun getUser(fromServer: Boolean, username: String): User = userApi.getUser(username).let {
+        euserEntityMapper.mapToDomain(it)
     }
 }
