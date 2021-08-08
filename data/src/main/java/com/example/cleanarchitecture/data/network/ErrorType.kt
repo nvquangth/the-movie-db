@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.remote
+package com.example.cleanarchitecture.data.network
 
 enum class ErrorType {
 

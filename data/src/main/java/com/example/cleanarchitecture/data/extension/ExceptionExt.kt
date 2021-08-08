@@ -1,6 +1,6 @@
 package com.example.cleanarchitecture.data.extension
 
-import com.example.cleanarchitecture.data.model.ErrorResponse
+import com.example.cleanarchitecture.data.network.response.ErrorResponse
 import com.example.cleanarchitecture.entity.exception.CleanException
 import com.example.cleanarchitecture.entity.exception.CleanExceptionType
 import com.google.gson.Gson

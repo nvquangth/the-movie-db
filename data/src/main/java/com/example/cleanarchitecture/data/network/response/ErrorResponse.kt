@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.model
+package com.example.cleanarchitecture.data.network.response
 
 data class ErrorResponse(
     val type: String? = null,

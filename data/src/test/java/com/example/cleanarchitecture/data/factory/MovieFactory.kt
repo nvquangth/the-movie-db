@@ -1,7 +1,7 @@
 package com.example.cleanarchitecture.data.factory
 
 import com.example.cleanarchitecture.data.model.MovieEntity
-import com.example.cleanarchitecture.data.model.MoviesResponse
+import com.example.cleanarchitecture.data.network.response.MoviesResponse
 
 object MovieFactory {
 

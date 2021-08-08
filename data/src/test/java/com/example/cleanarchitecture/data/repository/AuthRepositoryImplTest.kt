@@ -7,9 +7,9 @@ import com.example.cleanarchitecture.data.extension.mock
 import com.example.cleanarchitecture.data.extension.whenever
 import com.example.cleanarchitecture.data.factory.AuthFactory
 import com.example.cleanarchitecture.data.factory.ErrorResponseFactory
+import com.example.cleanarchitecture.data.network.api.AuthApi
 import com.example.cleanarchitecture.data.pref.AppPref
 import com.example.cleanarchitecture.data.pref.PrefHelper
-import com.example.cleanarchitecture.data.remote.AuthApi
 import com.example.cleanarchitecture.domain.repository.AuthRepository
 import com.example.cleanarchitecture.entity.exception.CleanException
 import com.example.cleanarchitecture.entity.exception.CleanExceptionType

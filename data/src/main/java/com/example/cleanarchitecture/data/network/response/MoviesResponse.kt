@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.model
+package com.example.cleanarchitecture.data.network.response
 
 import com.google.gson.annotations.SerializedName
 
@@ -8,5 +8,5 @@ data class MoviesResponse(
     val totalResults: Int? = null,
     @SerializedName("total_pages")
     val totalPages: Int? = null,
-    val results: List<MovieEntity>? = null
+    val results: List<MovieResponse>? = null
 )

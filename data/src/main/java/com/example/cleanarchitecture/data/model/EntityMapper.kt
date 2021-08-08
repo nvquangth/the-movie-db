@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.base
+package com.example.cleanarchitecture.data.model
 
 import com.example.cleanarchitecture.entity.Model
 

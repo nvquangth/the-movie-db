@@ -1,18 +1,14 @@
 package com.example.cleanarchitecture.data.model
 
-import com.example.cleanarchitecture.data.base.EntityMapper
-import com.example.cleanarchitecture.data.base.ModelEntity
 import com.example.cleanarchitecture.entity.Auth
-import com.google.gson.annotations.SerializedName
 import javax.inject.Inject
 
 data class AuthEntity(
-    @SerializedName("id")
     val userId: String,
     val username: String? = null,
     val email: String? = null,
     val token: String? = null
-) : ModelEntity()
+) : ModelEntity
 
 class AuthEntityMapper @Inject constructor() : EntityMapper<Auth, AuthEntity> {
     override fun mapToData(model: Auth): AuthEntity = AuthEntity(

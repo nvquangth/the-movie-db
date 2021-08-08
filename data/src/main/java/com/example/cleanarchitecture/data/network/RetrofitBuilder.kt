@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture.data.remote
+package com.example.cleanarchitecture.data.network
 
 import com.example.cleanarchitecture.data.BuildConfig
 import okhttp3.Authenticator

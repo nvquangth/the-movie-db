@@ -8,7 +8,7 @@ import com.example.cleanarchitecture.data.extension.whenever
 import com.example.cleanarchitecture.data.factory.ErrorResponseFactory
 import com.example.cleanarchitecture.data.factory.MovieFactory
 import com.example.cleanarchitecture.data.model.MovieEntityMapper
-import com.example.cleanarchitecture.data.remote.MovieApi
+import com.example.cleanarchitecture.data.network.api.MovieApi
 import com.example.cleanarchitecture.domain.repository.MovieRepository
 import com.example.cleanarchitecture.entity.exception.CleanException
 import com.example.cleanarchitecture.entity.exception.CleanExceptionType

@@ -1,6 +1,6 @@
-package com.example.cleanarchitecture.data.remote
+package com.example.cleanarchitecture.data.network.api
 
-import com.example.cleanarchitecture.data.model.AuthEntity
+import com.example.cleanarchitecture.data.network.response.AuthResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -12,7 +12,7 @@ interface AuthApi {
     suspend fun login(
         @Field("username") username: String,
         @Field("password") password: String
-    ): AuthEntity
+    ): AuthResponse
 
     @FormUrlEncoded
     @POST
@@ -20,5 +20,5 @@ interface AuthApi {
         @Field("username") username: String,
         @Field("password") password: String,
         @Field("email") email: String
-    ): AuthEntity
+    ): AuthResponse
 }

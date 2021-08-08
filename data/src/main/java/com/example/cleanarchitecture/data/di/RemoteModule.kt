@@ -5,10 +5,9 @@ import com.example.cleanarchitecture.data.anotation.APIKeyInterceptorOkHttpClien
 import com.example.cleanarchitecture.data.anotation.AuthOkHttpClient
 import com.example.cleanarchitecture.data.anotation.NoInterceptorOkHttpClient
 import com.example.cleanarchitecture.data.interceptor.AuthInterceptor
-import com.example.cleanarchitecture.data.remote.AuthApi
-import com.example.cleanarchitecture.data.remote.MovieApi
-import com.example.cleanarchitecture.data.remote.RetrofitBuilder
-import com.example.cleanarchitecture.data.remote.UserApi
+import com.example.cleanarchitecture.data.network.RetrofitBuilder
+import com.example.cleanarchitecture.data.network.api.AuthApi
+import com.example.cleanarchitecture.data.network.api.MovieApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,11 +41,6 @@ object RemoteModule {
         .addInterceptors(authInterceptor)
         .setBaseUrl(BuildConfig.BASE_URL)
         .build()
-
-    @Singleton
-    @Provides
-    fun provideUserApi(@NoInterceptorOkHttpClient retrofit: Retrofit): UserApi =
-        retrofit.create(UserApi::class.java)
 
     @Singleton
     @Provides
