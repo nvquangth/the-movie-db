@@ -14,6 +14,7 @@ import com.example.cleanarchitecture.model.MovieItemMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,15 +32,14 @@ class DetailMovieViewModel @Inject constructor(
             delay(5000L)
 
             try {
-                val movie = getDetailMovieUseCase.execute(
+                getDetailMovieUseCase.execute(
                     GetDetailMovieUseCase.Params(
                         movieId = it,
                         fromServer = true
                     )
-                ).let {
-                    movieItemMapper.mapToPresentation(it)
+                ).collect {
+                    emit(Result.Success(movieItemMapper.mapToPresentation(it)))
                 }
-                emit(Result.Success(movie))
             } catch (e: CleanException) {
                 emit(Result.Error(e))
             }

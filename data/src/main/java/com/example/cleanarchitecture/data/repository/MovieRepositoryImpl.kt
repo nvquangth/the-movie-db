@@ -1,26 +1,51 @@
 package com.example.cleanarchitecture.data.repository
 
+import com.example.cleanarchitecture.data.database.room.dao.MovieDao
+import com.example.cleanarchitecture.data.database.room.entity.MovieRoomEntityMapper
 import com.example.cleanarchitecture.data.model.MovieEntityMapper
 import com.example.cleanarchitecture.data.network.api.MovieApi
 import com.example.cleanarchitecture.data.network.response.MovieResponseEntityMapper
 import com.example.cleanarchitecture.domain.repository.MovieRepository
 import com.example.cleanarchitecture.entity.Movie
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val api: MovieApi,
+    private val movieDao: MovieDao,
     private val movieEntityMapper: MovieEntityMapper,
-    private val movieResponseEntityMapper: MovieResponseEntityMapper
+    private val movieResponseEntityMapper: MovieResponseEntityMapper,
+    private val movieRoomEntityMapper: MovieRoomEntityMapper,
 ) : MovieRepository {
-    override suspend fun getMovie(movieId: Int, fromServer: Boolean): Movie = api.getMovie(movieId)
-        .let { movieResponseEntityMapper.mapToModelEntity(it) }
-        .let { movieEntityMapper.mapToDomain(it) }
+    override fun getMovie(movieId: Int): Flow<Movie> {
+        TODO("Not yet implemented")
+    }
 
-    override suspend fun searchMovie(q: String, page: Int, fromServer: Boolean): List<Movie>? = api.searchMovies(q, page).results
-        ?.map { movieResponseEntityMapper.mapToModelEntity(it) }
-        ?.map { movieEntityMapper.mapToDomain(it) }
+    override fun searchMovie(q: String, page: Int): Flow<List<Movie>> {
+        TODO("Not yet implemented")
+    }
 
-    override suspend fun getPopularMovie(page: Int): List<Movie>? = api.getPopularMovie(page).results
-        ?.map { movieResponseEntityMapper.mapToModelEntity(it) }
-        ?.map { movieEntityMapper.mapToDomain(it) }
+    override fun getPopularMovie(page: Int): Flow<List<Movie>> = flow {
+
+        val movies = api.getPopularMovie(page).results ?: emptyList()
+
+        movies.map {
+            movieResponseEntityMapper.mapToModelEntity(it)
+        }.run {
+            map { movieRoomEntityMapper.mapToRoomEntity(it) }.also { movieDao.insert(it) }
+
+            map { movieEntityMapper.mapToDomain(it) }.also { emit(it) }
+        }
+    }.catch {
+        emitAll(
+            movieDao.getAll().map {
+                it.map { movieRoomEntityMapper.mapToModelEntity(it) }
+                    .map { movieEntityMapper.mapToDomain(it) }
+            }
+        )
+    }
 }

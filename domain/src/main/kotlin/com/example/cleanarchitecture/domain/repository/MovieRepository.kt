@@ -1,12 +1,13 @@
 package com.example.cleanarchitecture.domain.repository
 
 import com.example.cleanarchitecture.entity.Movie
+import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository : Repository {
 
-    suspend fun getMovie(movieId: Int, fromServer: Boolean): Movie?
+    fun getMovie(movieId: Int): Flow<Movie>
 
-    suspend fun searchMovie(q: String, page: Int, fromServer: Boolean): List<Movie>?
+    fun searchMovie(q: String, page: Int): Flow<List<Movie>>
 
-    suspend fun getPopularMovie(page: Int): List<Movie>?
+    fun getPopularMovie(page: Int): Flow<List<Movie>>
 }

@@ -8,6 +8,8 @@ import com.example.cleanarchitecture.domain.usecase.movie.SearchMovieUseCase
 import com.example.cleanarchitecture.model.MovieItem
 import com.example.cleanarchitecture.model.MovieItemMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,8 +30,11 @@ class SearchMovieViewModel @Inject constructor(
 
                 try {
                     val movies = searchMovieUseCase.execute(SearchMovieUseCase.Params(q, 1, true))
-                        .map { movieItemMapper.mapToPresentation(it) }
-                    movieResults.postValue(Result.Success(movies))
+                        .map { it.map {movieItemMapper.mapToPresentation(it)} }
+                        .collect {
+                            movieResults.postValue(Result.Success(it))
+                        }
+
                 } catch (e: Throwable) {
                     movieResults.postValue(Result.Error(e))
                 }

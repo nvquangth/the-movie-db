@@ -1,9 +1,6 @@
 package com.example.cleanarchitecture.ui.popularmovie
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.switchMap
+import androidx.lifecycle.*
 import com.bt.presentation.base.model.Result
 import com.bt.presentation.base.ui.BaseViewModel
 import com.bt.presentation.base.utils.Event
@@ -14,6 +11,8 @@ import com.example.cleanarchitecture.model.MovieItem
 import com.example.cleanarchitecture.model.MovieItemMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,11 +29,13 @@ class PopularMovieViewModel @Inject constructor(
     val movieResults: LiveData<Result<List<MovieItem>>> = _getPopularMovieEvent.switchMap {
         liveData(defaultDispatcher) {
             emit(Result.Loading)
-
             try {
-                val movies = getPopularMovieUseCase.execute(GetPopularMovieUseCase.Params(page))
-                    .map { movieItemMapper.mapToPresentation(it) }
-                emit(Result.Success(movies))
+                getPopularMovieUseCase.execute(GetPopularMovieUseCase.Params(page))
+                    .map { it.map { movieItemMapper.mapToPresentation(it) } }
+                    .collect {
+                        emit(Result.Success(it))
+                    }
+
             } catch (e: CleanException) {
                 emit(Result.Error(e))
                 setExceptionAsync(e)

@@ -18,6 +18,9 @@ dependencies {
     // Hilt
     implementation(Libs.hiltCore)
 
+    // Coroutines
+    implementation(Libs.coroutines)
+
     // JUnit
     testImplementation(Libs.jUnit)
 
